@@ -16,7 +16,17 @@
 		<div id="content">
 			<div id="board">
 				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board">
-					<input type = "hidden" name = "a" value="write">
+				
+				<c:choose>
+					<c:when test="${empty reply}">
+						<input type = "hidden" name = "a" value="write">
+					</c:when>
+					<c:otherwise>
+						<input type = "hidden" name = "a" value="reply">
+						<input type = "hidden" name = "num" value="${num }">
+					</c:otherwise>
+				</c:choose>				
+						
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글쓰기</th>
@@ -36,7 +46,7 @@
 						<a href="${pageContext.request.contextPath }/board">취소</a>
 						<input type="submit" value="등록">
 					</div>
-				</form>				
+				</form>
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp" />

@@ -28,6 +28,7 @@ public class ViewFormAction implements Action {
 //		if (request.getAttribute("list") == null) {
 //			System.out.println("없누...");
 //		}
+//		원래 list의 get() 메소드 사용하려했으나 null이 떠서 사용할 수 없음.
 		
 
 		
