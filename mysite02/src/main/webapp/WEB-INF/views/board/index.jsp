@@ -35,7 +35,7 @@
 						<td>${count - index }</td>
 						
 						<c:choose>
-							<c:when test='${ list.oNo == 0 && list.depth == 0}'>
+							<c:when test='${ list.depth == 0}'>
 								<td style="text-align:left; padding-left:0px">
 									<a href="${pageContext.request.contextPath }/board?a=view">${list.no } 번째 글입니다.</a>
 								</td>

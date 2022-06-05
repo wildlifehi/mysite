@@ -27,7 +27,7 @@ public class BoardRepository {
 					"   select board.no, title, contents, hit, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date, g_no, o_no, depth, user_no, name" +
 					"     from board, user" +
 					"	 where board.user_no = user.no"+
-					" order by reg_date asc";
+					" order by g_no desc, o_no ";
 
 			pstmt = conn.prepareStatement(sql);
 			
