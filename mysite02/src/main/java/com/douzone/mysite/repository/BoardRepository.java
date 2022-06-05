@@ -87,6 +87,7 @@ public class BoardRepository {
 			}
 		}
 		
+		System.out.println("리스트 작성 완료!");
 		return list;
 	}
 
@@ -163,6 +164,7 @@ public class BoardRepository {
 			}
 		}
 		
+		System.out.println("검색완료!");
 		return vo;
 	}
 	
@@ -213,12 +215,112 @@ public class BoardRepository {
 			}
 		}
 		
-		System.out.println("잘들어간거같네요");
+		System.out.println("새 글 작성(삽입)이 잘 되었습니다.");
 		
 		
 		return result;
 		
 	}
+	
+	
+	///////////////////////// DELETE ////////////////////////////
+	
+	public boolean delete(Long num) {
+		boolean result = false;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			conn = getConnection();
+		
+			
+			String sql ="delete from board where no= ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, num);
+
+			int count = pstmt.executeUpdate();
+			result = count == 1;
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			//5. 자원 반납하기 !! 매우 중요.
+
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println("글 삭제가 완료되었습니다.");
+		
+		
+		return result;
+
+		
+	}
+	
+	public boolean update(Long num, String title, String contents) {
+		boolean result = false;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			conn = getConnection();
+		
+			
+			String sql = "update board set title = ?, contents = ? where no = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, title);
+			pstmt.setString(2, contents);
+			pstmt.setLong(3, num);
+			
+			int count = pstmt.executeUpdate();
+			result = count == 1;
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			//5. 자원 반납하기 !! 매우 중요.
+
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println("글수정(업뎃)이 완료되었습니다.");
+		
+		
+		return result;
+		
+	}
+
 	
 	
 	
@@ -240,10 +342,6 @@ public class BoardRepository {
 		
 		return conn;
 	}
-
-
-
-
 
 
 }

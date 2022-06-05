@@ -20,6 +20,8 @@ public class BoardActionFactory extends ActionFactory {
 			action = new ModifyAction();
 		} else if ("viewform".equals(actionName)) {
 			action = new ViewFormAction();
+		} else if ("delete".equals(actionName)) {
+			action = new DeleteAction();
 		} else {
 			action = new IndexAction();
 		}

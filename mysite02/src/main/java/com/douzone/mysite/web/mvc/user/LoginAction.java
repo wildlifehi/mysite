@@ -37,6 +37,8 @@ public class LoginAction implements Action {
 		/* 로그인 처리 */
 		HttpSession session = request.getSession(true);
 		session.setAttribute("authUser", authUser);
+		
+		//이건 게시판 '글쓰기'기능시 사용하기 위함
 		session.setAttribute("userNo", authUser.getNo());
 		
 		WebUtil.redirect(request, response, request.getContextPath());

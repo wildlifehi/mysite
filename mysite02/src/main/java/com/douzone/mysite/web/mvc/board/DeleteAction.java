@@ -11,22 +11,24 @@ import com.douzone.mysite.vo.BoardVo;
 import com.douzone.web.mvc.Action;
 import com.douzone.web.util.WebUtil;
 
-public class ModifyFormAction implements Action {
+public class DeleteAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//해당 글 번호 받아오기
+		
+		//글 번호 받아오기
 		System.out.println(request.getParameter("num") + "이건 넘어옴");
 		Long num = Long.parseLong(request.getParameter("num"));
-		
-		//글 번호 바탕으로 검색 해주기 객체 반환
-		BoardVo vo = new BoardRepository().findByNum(num);
-		request.setAttribute("vo", vo);
-		
-		System.out.println("수정폼으로 잘 넘겨드렸습니다.");
-		WebUtil.forward(request, response, "board/modify");
 
+		
+
+		//삭제해주기
+		new BoardRepository().delete(num);
+		System.out.println("삭제작업 잘 처리 됩니다.");
+		
+		WebUtil.redirect(request, response, request.getContextPath() + "/board");
+		
 	}
 
 }
