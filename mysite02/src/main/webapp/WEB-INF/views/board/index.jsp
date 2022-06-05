@@ -16,57 +16,48 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp"/>
 		<div id="content">
 			<div id="board">
+			
+				<!-- 찾기 기능은 조금 있다가 할 것 -->
 				<form id="search_form" action="" method="post">
 					<input type="text" id="kwd" name="kwd" value="">
 					<input type="submit" value="찾기">
 				</form>
 				<table class="tbl-ex">
+				
+				<!-- 여까지 찾기 기능입니다 -->
+				
 					<c:import url="/WEB-INF/views/includes/boardtitle.jsp" />
-					
-					<!-- 여기는 forEach 문으로 정리해줄것 -->
-					<c:forEach var='wow' items='${list }'>	
-						<td>${wow.no }</td>
-					</c:forEach>
-					<c:forEach begin='1' end='3' step='1' var='i'>
+
+					<c:set var='index' value='0'/>
+					<c:set var='count' value='${list.size() }'/>									
+					<c:forEach var='list' items='${list }'>	
 					<tr>
-						<td>${i }</td>
-						<td style="text-align:left; padding-left:0px">
-							<a href="${pageContext.request.contextPath }/board?a=view">${i } 번째 글입니다.</a>
-						</td>
-						<td>안대혁</td>
-						<% // 글쓴이 이름은, userNo으로 조회해와야할 것. %>
+						<td>${count - index }</td>
+						
+						<c:choose>
+							<c:when test='${ list.oNo == 0 && list.depth == 0}'>
+								<td style="text-align:left; padding-left:0px">
+									<a href="${pageContext.request.contextPath }/board?a=view">${list.no } 번째 글입니다.</a>
+								</td>
+							</c:when>
+							<c:otherwise>
+								<td style="text-align:left; padding-left:${10 + list.depth*10}px">
+									<img src='${pageContext.servletContext.contextPath }/assets/images/reply.png' />
+									<a href="${pageContext.request.contextPath }/board?a=view">${list.no } 번째 글입니다.</a>
+								</td>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:set var='index' value='${index + 1 }'/>
+						<td> ${list.name }</td>
+						
 						<td>3</td>
-						<td>2015-10-11 12:04:20</td>
+						<td>${list.regDate }</td>
 						<td><a href="" class="del">삭제</a></td>
 					</tr>
 					</c:forEach>
 				</table>		
 				
-					
-
-					<!-- 아래 코드를 참조해서 foreach문으로 교정
-					<c:set var='index' value='0'/>
-					<c:set var='count' value='${list.size() }'/>
-					<c:forEach var='list' items='${list }'>
-						<li>
-							<table>
-								<tr>
-									<td>[${count - index }]</td>
-									<c:set var='index' value='${index+1 }'/>
-									<td>${list.name }</td>
-									<td>${list.regDate }</td>
-									<td><a href="${pageContext.request.contextPath }/guestbook?a=deleteform&no=${list.no}">삭제</a></td>
-								</tr>
-								<tr>
-									<td colspan=4>
-										${fn:replace(list.message,newLine, "<br/>") }
-									</td>
-								</tr>
-							</table>
-							<br>
-						</li>
-					</c:forEach>
-					-->
 				
 				
 				<!-- pager 추가 -->
@@ -74,8 +65,8 @@
 				<div class="pager">
 					<ul>
 						<li><a href="">◀</a></li>
-						<li><a href="">1</a></li>
-						<li class="selected">2</li>
+						<li class="selected"><a href="">1</a></li>
+						<li>2</li>
 						<li><a href="">3</a></li>
 						<li>4</li>
 						<li>5</li>

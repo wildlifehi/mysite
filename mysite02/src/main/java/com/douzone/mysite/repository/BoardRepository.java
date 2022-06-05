@@ -11,6 +11,7 @@ import java.util.List;
 import com.douzone.mysite.vo.BoardVo;
 
 public class BoardRepository {
+	
 	public List<BoardVo> findAll() {
 		List<BoardVo> list = new ArrayList<>();
 		
@@ -23,9 +24,10 @@ public class BoardRepository {
 			
 			//3. sql문 작성 및 Connection 객체로부터 (prepared)Statement 객체 얻어오기
 			String sql =
-					"   select no, title, contents, hit, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date, g_no, o_no, depth, user_no" +
-					"     from board" +
-					" order by reg_date desc";
+					"   select board.no, title, contents, hit, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date, g_no, o_no, depth, user_no, name" +
+					"     from board, user" +
+					"	 where board.user_no = user.no"+
+					" order by reg_date asc";
 
 			pstmt = conn.prepareStatement(sql);
 			
@@ -43,6 +45,7 @@ public class BoardRepository {
 				Long oNo = rs.getLong(7);
 				Long depth = rs.getLong(8);
 				Long userNo = rs.getLong(9);
+				String name = rs.getString(10);
 				
 				//꺼내용 내용 BoardVo 객체에 넣어주기
 				BoardVo vo = new BoardVo();
@@ -55,11 +58,10 @@ public class BoardRepository {
 				vo.setoNo(oNo);
 				vo.setDepth(depth);
 				vo.setUserNo(userNo);
-				
-				//잘 가지고 나왔누?
-				System.out.println(vo.toString());
+				vo.setName(name);
 				
 				list.add(vo);
+				
 			}
 			
 		} catch (SQLException e) {
@@ -83,7 +85,7 @@ public class BoardRepository {
 			}
 		}
 		
-		return null;
+		return list;
 	}
 
 
