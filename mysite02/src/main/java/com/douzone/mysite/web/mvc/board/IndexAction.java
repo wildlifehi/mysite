@@ -19,8 +19,9 @@ public class IndexAction implements Action {
 		List<BoardVo> list = new BoardRepository().findAll();
 		
 		request.setAttribute("list", list);
+
 		WebUtil.forward(request, response, "board/index");
-		System.out.println("매핑은 잘 이루어졌습니다. list도 잘 받아꾸요");
+		System.out.println("객체 잘 받아서 넘겼습니다.");
 	}
 
 }

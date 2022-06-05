@@ -22,11 +22,11 @@ public class BoardRepository {
 			conn = getConnection();
 			
 			//3. sql문 작성 및 Connection 객체로부터 (prepared)Statement 객체 얻어오기
-			String sql = "select no, title, contents, hit, " +
-					     "date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date" +
-						 ", g_no, o_no, depth, user_no" +
-					     "from board" +
-					     " order by reg_date desc";
+			String sql =
+					"   select no, title, contents, hit, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date, g_no, o_no, depth, user_no" +
+					"     from board" +
+					" order by reg_date desc";
+
 			pstmt = conn.prepareStatement(sql);
 			
 			//4. (매핑작업 후) 쿼리 결과 얻어오기, select문에서는 매핑작업이 없다.
@@ -55,6 +55,9 @@ public class BoardRepository {
 				vo.setoNo(oNo);
 				vo.setDepth(depth);
 				vo.setUserNo(userNo);
+				
+				//잘 가지고 나왔누?
+				System.out.println(vo.toString());
 				
 				list.add(vo);
 			}
