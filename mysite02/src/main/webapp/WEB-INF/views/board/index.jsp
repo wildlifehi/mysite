@@ -41,7 +41,7 @@
 								</td>
 							</c:when>
 							<c:otherwise>
-								<td style="text-align:left; padding-left:${10 + list.depth*10}px">
+								<td style="text-align:left; padding-left:${list.depth*10}px">
 									<img src='${pageContext.servletContext.contextPath }/assets/images/reply.png' />
 									<a href="${pageContext.request.contextPath }/board?a=view">${list.no } 번째 글입니다.</a>
 								</td>
@@ -53,7 +53,9 @@
 						
 						<td>3</td>
 						<td>${list.regDate }</td>
-						<td><a href="" class="del">삭제</a></td>
+						<c:if test='${authUser != null && authUser.name == list.name }'>
+							<td><a href="" class="del">삭제</a></td>
+						</c:if>
 					</tr>
 					</c:forEach>
 				</table>		
