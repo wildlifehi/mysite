@@ -24,6 +24,7 @@ public class LoginAction implements Action {
 		vo.setPassword(password);
 		
 		UserVo authUser = new UserRepository().findByEmailAndPassword(vo);
+		
 		if(authUser == null) {
 			/* 로그인 실패 */
 			System.out.println("로그인 실패");
@@ -36,6 +37,7 @@ public class LoginAction implements Action {
 		/* 로그인 처리 */
 		HttpSession session = request.getSession(true);
 		session.setAttribute("authUser", authUser);
+		session.setAttribute("userNo", authUser.getNo());
 		
 		WebUtil.redirect(request, response, request.getContextPath());
 	}

@@ -10,12 +10,16 @@ public class BoardActionFactory extends ActionFactory {
 		Action action = null;
 		
 		//이 안에 지금 파라미터 a에 지정된 actionName이 들어오고 있다.
-		if("write".equals(actionName)) {
+		if("writeform".equals(actionName)) {
+			action = new WriteFormAction();
+		} else if ("write".equals(actionName)) {
 			action = new WriteAction();
+		} else if ("modifyform".equals(actionName)) {
+			action = new ModifyFormAction();
 		} else if ("modify".equals(actionName)) {
 			action = new ModifyAction();
-		} else if ("view".equals(actionName)) {
-			action = new ViewAction();
+		} else if ("viewform".equals(actionName)) {
+			action = new ViewFormAction();
 		} else {
 			action = new IndexAction();
 		}

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.douzone.web.mvc.Action;
 import com.douzone.web.util.WebUtil;
 
-public class ViewAction implements Action {
+public class ViewFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

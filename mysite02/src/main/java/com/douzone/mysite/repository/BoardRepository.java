@@ -12,6 +12,8 @@ import com.douzone.mysite.vo.BoardVo;
 
 public class BoardRepository {
 	
+	
+	///////////////////////// SELECT ////////////////////////////
 	public List<BoardVo> findAll() {
 		List<BoardVo> list = new ArrayList<>();
 		
@@ -90,6 +92,61 @@ public class BoardRepository {
 
 
 
+	///////////////////////// INSERT ////////////////////////////
+	
+	public boolean insert(BoardVo vo) {
+		boolean result = false;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			conn = getConnection();
+		
+			
+			String sql ="	insert into board " +
+						"  	values(null, ?, ?, 0, now(), " +
+						"	(select if(g_no is null, 1, max(g_no) + 1 ) from board as a) ,0 ,0, ?)";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContents());
+			pstmt.setLong(3, vo.getUserNo());
+			
+			int count = pstmt.executeUpdate();
+			result = count == 1;
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			//5. 자원 반납하기 !! 매우 중요.
+
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println("잘들어간거같네요");
+		
+		
+		return result;
+		
+	}
+	
+	
+	
 	
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
@@ -107,5 +164,5 @@ public class BoardRepository {
 		} 
 		
 		return conn;
-	}	
+	}
 }
