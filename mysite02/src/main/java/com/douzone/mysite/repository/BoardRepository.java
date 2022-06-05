@@ -90,8 +90,83 @@ public class BoardRepository {
 		return list;
 	}
 
+///////////////////////// ViEW로 넘겨주기 ////////////////////////////
+	
+	public BoardVo findByNum(Long num) {
+		BoardVo vo = new BoardVo();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			
+			//3. sql문 작성 및 Connection 객체로부터 (prepared)Statement 객체 얻어오기
+			String sql =
+					"   select board.no, title, contents, hit, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date, g_no, o_no, depth, user_no, name" +
+					"     from board, user" +
+					"	 where board.no = ?"+
+					" order by g_no desc, o_no ";
 
-
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, num);
+			
+			//4. (매핑작업 후) 쿼리 결과 얻어오기
+			rs = pstmt.executeQuery();
+				
+			//5. 처리결과 받아오기
+			while(rs.next()) {
+				Long no = rs.getLong(1);
+				String title = rs.getString(2);
+				String contents = rs.getString(3);
+				Long hit = rs.getLong(4);
+				String regDate = rs.getString(5);
+				Long gNo = rs.getLong(6);
+				Long oNo = rs.getLong(7);
+				Long depth = rs.getLong(8);
+				Long userNo = rs.getLong(9);
+				String name = rs.getString(10);
+				
+				//꺼내용 내용 BoardVo 객체에 넣어주기
+				vo.setNo(no);
+				vo.setTitle(title);
+				vo.setContents(contents);
+				vo.setHit(hit);
+				vo.setRegDate(regDate);
+				vo.setgNo(gNo);
+				vo.setoNo(oNo);
+				vo.setDepth(depth);
+				vo.setUserNo(userNo);
+				vo.setName(name);
+				
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			
+			//5. 자원 반납하기 !! 매우 중요.
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return vo;
+	}
+	
+	
 	///////////////////////// INSERT ////////////////////////////
 	
 	public boolean insert(BoardVo vo) {
@@ -165,4 +240,10 @@ public class BoardRepository {
 		
 		return conn;
 	}
+
+
+
+
+
+
 }

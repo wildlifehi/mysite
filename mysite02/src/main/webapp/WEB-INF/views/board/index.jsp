@@ -37,13 +37,13 @@
 						<c:choose>
 							<c:when test='${ list.depth == 0}'>
 								<td style="text-align:left; padding-left:0px">
-									<a href="${pageContext.request.contextPath }/board?a=viewform">${list.no } 번째 글입니다.</a>
+									<a href="${pageContext.request.contextPath }/board?a=viewform&num=${list.no }">  ${list.no } 번째 글입니다.</a>
 								</td>
 							</c:when>
 							<c:otherwise>
 								<td style="text-align:left; padding-left:${list.depth*10}px">
 									<img src='${pageContext.servletContext.contextPath }/assets/images/reply.png' />
-									<a href="${pageContext.request.contextPath }/board?a=viewform">${list.no } 번째 글입니다.</a>
+									<a href="${pageContext.request.contextPath }/board?a=viewform&num=${list.no }">  ${list.no } 번째 글입니다.</a>
 								</td>
 							</c:otherwise>
 						</c:choose>
