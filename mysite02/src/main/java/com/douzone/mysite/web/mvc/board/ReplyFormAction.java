@@ -15,15 +15,15 @@ public class ReplyFormAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//a=reply&num=${vo.no } 가지고 넘어왔다. << 게시글 번호
-		// >> 이거 우선 num로 변환해서 넘겨주기 해당 넘버로부터 select 조회해서 gNo 얻어 낼것.
-		// 그리고 해당 gNo로부터 oNo 최대값 붙여줄 것, 
-		// 연이어 해당 oNo로부터 depth값 추가해줄 것이기때문에.
+		// oNo, depth 전부 부모글 기준에서 +1해줄 것이므로 gNo oNo 받아오기
 		
-		
-		//글 번호 넘겨주기 
+		//글 번호 바탕으로 BoardVo 받아와서 그중에서 g.o.d 받아올것이므로 이 값을 ReplyAction으로 보내주기
 		String num = request.getParameter("num");
 		request.setAttribute("num", num);
+		
+		
+		
+		
 		
 		//reply 용 폼을 구분해주기 위해서 아래 내용으로 보내줄것
 		request.setAttribute("reply", "reply");

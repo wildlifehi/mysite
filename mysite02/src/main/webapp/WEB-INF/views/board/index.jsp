@@ -41,7 +41,7 @@
 								</td>
 							</c:when>
 							<c:otherwise>
-								<td style="text-align:left; padding-left:${list.depth*10}px">
+								<td style="text-align:left; padding-left:${list.depth*20}px">
 									<img src='${pageContext.servletContext.contextPath }/assets/images/reply.png' />
 									<a href="${pageContext.request.contextPath }/board?a=viewform&num=${list.no }">  ${list.title } </a>
 								</td>

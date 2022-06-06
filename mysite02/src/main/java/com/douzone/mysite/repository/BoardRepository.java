@@ -29,7 +29,7 @@ public class BoardRepository {
 					"   select board.no, title, contents, hit, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date, g_no, o_no, depth, user_no, name" +
 					"     from board, user" +
 					"	 where board.user_no = user.no"+
-					" order by g_no desc, o_no ";
+					" order by g_no desc, o_no";
 
 			pstmt = conn.prepareStatement(sql);
 			
@@ -108,7 +108,7 @@ public class BoardRepository {
 					"   select board.no, title, contents, hit, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date, g_no, o_no, depth, user_no, name" +
 					"     from board, user" +
 					"	 where board.no = ?"+
-					" order by g_no desc, o_no ";
+					" order by g_no desc, o_no";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, num);
@@ -184,7 +184,7 @@ public class BoardRepository {
 			
 			String sql ="	insert into board " +
 						"  	values(null, ?, ?, 0, now(), " +
-						"	(select if(g_no is null, 1, max(g_no) + 1 ) from board as a) ,0 ,0, ?)";
+						"	(select if(g_no is null, 1, max(g_no) + 1 ) from board as a) ,1 ,0, ?)";
 			
 			pstmt = conn.prepareStatement(sql);
 			
@@ -222,6 +222,63 @@ public class BoardRepository {
 		
 	}
 	
+	///////////////////////// REPLY ////////////////////////////
+	public boolean reply(String title, String contents, Long gNo, Long oNo, Long depth, Long userNo) {
+		boolean result = false;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			conn = getConnection();
+		
+			
+			String sql ="	insert into board " +
+						"  	values(null, ?, ?, 0, now(), ?, " +
+						"	if( ? !=0 , ?, (select max(o_no) from board as a where g_no = ?) + 1) , ?+1, ?)";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, title);
+			pstmt.setString(2, contents);
+			pstmt.setLong(3, gNo);
+			pstmt.setLong(4, depth);
+			pstmt.setLong(5, oNo);
+			pstmt.setLong(6, gNo);
+			pstmt.setLong(7, depth);
+			pstmt.setLong(8, userNo);
+			
+			int count = pstmt.executeUpdate();
+			result = count == 1;
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			//5. 자원 반납하기 !! 매우 중요.
+
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println(" 댓글 작성(삽입)이 잘 되었습니다.");
+		
+		
+		return result;	
+
+		
+	}
 	
 	///////////////////////// DELETE ////////////////////////////
 	
@@ -342,6 +399,5 @@ public class BoardRepository {
 		
 		return conn;
 	}
-
 
 }
