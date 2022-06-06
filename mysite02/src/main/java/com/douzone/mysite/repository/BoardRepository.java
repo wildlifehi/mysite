@@ -82,7 +82,6 @@ public class BoardRepository {
 					conn.close();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -103,7 +102,6 @@ public class BoardRepository {
 		try {
 			conn = getConnection();
 			
-			//3. sql문 작성 및 Connection 객체로부터 (prepared)Statement 객체 얻어오기
 			String sql =
 					"   select board.no, title, contents, hit, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date, g_no, o_no, depth, user_no, name" +
 					"     from board, user" +
@@ -113,10 +111,10 @@ public class BoardRepository {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, num);
 			
-			//4. (매핑작업 후) 쿼리 결과 얻어오기
+			
 			rs = pstmt.executeQuery();
 				
-			//5. 처리결과 받아오기
+			
 			while(rs.next()) {
 				Long no = rs.getLong(1);
 				String title = rs.getString(2);
@@ -129,7 +127,7 @@ public class BoardRepository {
 				Long userNo = rs.getLong(9);
 				String name = rs.getString(10);
 				
-				//꺼내용 내용 BoardVo 객체에 넣어주기
+				
 				vo.setNo(no);
 				vo.setTitle(title);
 				vo.setContents(contents);
@@ -147,7 +145,7 @@ public class BoardRepository {
 			System.out.println("error:" + e);
 		} finally {
 			
-			//5. 자원 반납하기 !! 매우 중요.
+			
 			try {
 				if(rs != null) {
 					rs.close();
@@ -159,7 +157,6 @@ public class BoardRepository {
 					conn.close();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -196,11 +193,8 @@ public class BoardRepository {
 			result = count == 1;
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			
-			//5. 자원 반납하기 !! 매우 중요.
 
 			try {
 				if(pstmt != null) {
@@ -210,14 +204,11 @@ public class BoardRepository {
 					conn.close();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		
 		System.out.println("새 글 작성(삽입)이 잘 되었습니다.");
-		
-		
 		return result;
 		
 	}
@@ -253,11 +244,8 @@ public class BoardRepository {
 			result = count == 1;
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			
-			//5. 자원 반납하기 !! 매우 중요.
 
 			try {
 				if(pstmt != null) {
@@ -267,32 +255,25 @@ public class BoardRepository {
 					conn.close();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		
 		System.out.println(" 댓글 작성(삽입)이 잘 되었습니다.");
-		
-		
 		return result;	
-
-		
+	
 	}
 	
 	///////////////////////// DELETE ////////////////////////////
-	
 	public boolean delete(Long num) {
 		boolean result = false;
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		
 		try {
 			conn = getConnection();
 		
-			
 			String sql ="delete from board where no= ?";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -302,11 +283,8 @@ public class BoardRepository {
 			result = count == 1;
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			
-			//5. 자원 반납하기 !! 매우 중요.
 
 			try {
 				if(pstmt != null) {
@@ -316,17 +294,13 @@ public class BoardRepository {
 					conn.close();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		
 		System.out.println("글 삭제가 완료되었습니다.");
-		
-		
 		return result;
 
-		
 	}
 	
 	public boolean update(Long num, String title, String contents) {
@@ -352,11 +326,8 @@ public class BoardRepository {
 			result = count == 1;
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			
-			//5. 자원 반납하기 !! 매우 중요.
 
 			try {
 				if(pstmt != null) {
@@ -366,14 +337,11 @@ public class BoardRepository {
 					conn.close();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		
 		System.out.println("글수정(업뎃)이 완료되었습니다.");
-		
-		
 		return result;
 		
 	}

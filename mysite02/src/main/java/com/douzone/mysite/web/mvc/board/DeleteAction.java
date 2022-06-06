@@ -18,10 +18,7 @@ public class DeleteAction implements Action {
 		
 		
 		//글 번호 받아오기
-		System.out.println(request.getParameter("num") + "이건 넘어옴");
 		Long num = Long.parseLong(request.getParameter("num"));
-
-		
 
 		//삭제해주기
 		new BoardRepository().delete(num);

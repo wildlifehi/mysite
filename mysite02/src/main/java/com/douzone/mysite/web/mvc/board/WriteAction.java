@@ -20,10 +20,6 @@ public class WriteAction implements Action {
 		String contents = request.getParameter("content");
 
 		
-		System.out.println("여기까지는 잘 도착");
-		// 글쓰기나 수정이나 gNo, oNo, depth 다루어야 할 것.
-		// 글쓰기 자체는 새 글이니까 oNo, depth 는 0 으로 기본값 주고, 수정은 받아서 반영.
-		// gNo 는 gNo max값에다가 하나 더 추가하는 식으로 줘야할 것.
 		BoardVo vo = new BoardVo();
 		
 		vo.setTitle(title);

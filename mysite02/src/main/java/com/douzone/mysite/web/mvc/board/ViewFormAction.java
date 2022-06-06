@@ -38,8 +38,7 @@ public class ViewFormAction implements Action {
 		
 		System.out.println("뷰 잘 넘겨드렸습니다.");
 		WebUtil.forward(request, response, "board/view");
-		
-
+	
 	}
 
 }

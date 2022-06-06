@@ -22,7 +22,7 @@ public class ReplyAction implements Action {
 		String title = request.getParameter("title");
 		String contents = request.getParameter("content");
 		
-		//2.글 번호 바탕으로 BoardVo 받아와서 그중에서 g.o.d 받아오기 oNo, depth 전부 부모글 기준에서 +1해줄 것
+		//2.글 번호 바탕으로 BoardVo 받아와서 그중에서 g.o.d 받아오기
 		Long num = Long.parseLong(request.getParameter("num"));
 		BoardVo vo = new BoardRepository().findByNum(num);
 		
@@ -34,9 +34,6 @@ public class ReplyAction implements Action {
 		HttpSession session = request.getSession();
 		Long userNo = (Long)session.getAttribute("userNo");
 	
-		System.out.println("여기까지는 잘 도착 이건 아직 아무작업하지않습니다.");
-	
-
 		new BoardRepository().reply(title, contents, gNo, oNo, depth, userNo);
 		WebUtil.redirect(request, response, request.getContextPath() + "/board");
 	}

@@ -17,7 +17,6 @@ public class ModifyFormAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//해당 글 번호 받아오기
-		System.out.println(request.getParameter("num") + "이건 넘어옴");
 		Long num = Long.parseLong(request.getParameter("num"));
 		
 		//글 번호 바탕으로 검색 해주기 객체 반환

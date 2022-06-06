@@ -20,8 +20,12 @@ from board, user
 where board.user_no = user.no
 order by g_no desc, o_no ;
 
--- insert into board values(null, '하이5', '글내용2', 1, now(), 3, 1, 2, 2 );
+insert into board values(null, '하이5', '글내용2', 1, now(), 2, 3, 1, 2 );
 -- insert into board values(null, 'title', 'contents', 0, now(), (select if(g_no is null, 1, max(g_no) + 1 )
 -- from board as a) ,0 ,0, 1);
 -- delete from board where no= 2;
 update board set title = '바꿈1', contents = '바꿈2' where no = 19;
+
+
+
+insert into board values(null, ?, ?, 0, now(), ?, if( ? !=0 , ?, (select max(o_no) from board as a where g_no = ?) + 1) , ?+1, ?);

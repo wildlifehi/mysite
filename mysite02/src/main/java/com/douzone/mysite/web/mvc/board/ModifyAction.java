@@ -17,7 +17,6 @@ public class ModifyAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//해당 글 번호 받아오기 및 파라미터 받아오기
-		System.out.println(request.getParameter("num") + "이건 넘어옴");
 		Long num = Long.parseLong(request.getParameter("num"));
 		String title = request.getParameter("title");
 		String contents = request.getParameter("content");
