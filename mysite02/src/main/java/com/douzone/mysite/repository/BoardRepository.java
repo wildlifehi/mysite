@@ -90,8 +90,8 @@ public class BoardRepository {
 		return list;
 	}
 
-///////////////////////// ViEW로 넘겨주기 ////////////////////////////
-	
+
+	///////////////////////// ViEW로 넘겨주기 ////////////////////////////
 	public BoardVo findByNum(Long num) {
 		BoardVo vo = new BoardVo();
 		
@@ -167,7 +167,6 @@ public class BoardRepository {
 	
 	
 	///////////////////////// INSERT ////////////////////////////
-	
 	public boolean insert(BoardVo vo) {
 		boolean result = false;
 		

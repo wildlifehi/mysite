@@ -28,4 +28,4 @@ update board set title = '바꿈1', contents = '바꿈2' where no = 19;
 
 
 
-insert into board values(null, ?, ?, 0, now(), ?, if( ? !=0 , ?, (select max(o_no) from board as a where g_no = ?) + 1) , ?+1, ?);
+insert into board values(null, 'a', 'c', 0, now(), 10, if( 0 !=0 , 1, (select max(o_no) from board as a where g_no = 10) + 1), 1, 4);
