@@ -358,7 +358,7 @@ public class BoardRepository {
 			//2. jdbc 프로토콜로, 192.168.0.76 ip 의 3306 포트로 들어가 mysql 로 접속해 webdb라는 테이블 호출
 			// 접속시 아이디 "webdb" 비밀번호 "webdb"
 			
-			String url = "jdbc:mysql://192.168.0.76:3306/webdb?characterEncoding=utf8";
+			String url = "jdbc:mysql://192.168.10.44:3306/webdb?characterEncoding=utf8";
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패:" + e);
