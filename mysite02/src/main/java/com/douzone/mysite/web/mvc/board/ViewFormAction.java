@@ -25,10 +25,10 @@ public class ViewFormAction implements Action {
 		
 		
 		//왜 여기서 request객체가 없는지 강사님한테 여쭤볼 것
-//		if (request.getAttribute("list") == null) {
-//			System.out.println("없누...");
-//		}
-//		원래 list의 get() 메소드 사용하려했으나 null이 떠서 사용할 수 없음.
+		if (request.getAttribute("list") == null) {
+			System.out.println("없누...");
+		}
+		//원래 list의 get() 메소드 사용하려했으나 null이 떠서 사용할 수 없음.
 		
 
 		

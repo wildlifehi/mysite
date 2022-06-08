@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.douzone.mysite.exception.GuestbookRepositoryException;
 import com.douzone.mysite.vo.GuestbookVo;
 
 @Repository
@@ -130,6 +131,7 @@ public class GuestbookRepository {
 			
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
+			throw new GuestbookRepositoryException(e.toString());
 		} finally {
 			try {
 				if(pstmt != null) {

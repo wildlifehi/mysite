@@ -41,33 +41,33 @@ public class UserController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(HttpSession session, UserVo vo, Model model) {
 		UserVo authUser = userService.getUser(vo);
-		
 		if(authUser == null) {
 			model.addAttribute("result", "fail");
 			model.addAttribute("email", vo.getEmail());
 			return "user/login";
 		}
 		
-		/* 인증 처리 */
+		/*인증 처리*/
 		session.setAttribute("authUser", authUser);
 		return "redirect:/";
 	}
-	
+
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("authUser");
 		session.invalidate();
+		
 		return "redirect:/";
 	}
-	
-	@RequestMapping(value="/update",method=RequestMethod.GET )
+
+	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String update(HttpSession session, Model model) {
 		// 접근 제어(Access Control)
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		if(authUser == null) {
 			return "redirect:/";
 		}
-		////////////////////////////////////////////
+		////////////////////////////////////////
 		
 		Long no = authUser.getNo();
 		UserVo userVo = userService.getUser(no);
@@ -75,19 +75,20 @@ public class UserController {
 		model.addAttribute("userVo", userVo);
 		return "user/update";
 	}
-	
-	
-	@RequestMapping(value="/update",method=RequestMethod.POST )
+
+	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(HttpSession session, UserVo vo) {
 		// 접근 제어(Access Control)
-				UserVo authUser = (UserVo) session.getAttribute("authUser");
-				if(authUser == null) {
-					return "redirect:/";
-				}
-				////////////////////////////////////////////
-				
-				System.out.println(vo);
-				
-				return "user/update";
-	}
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if(authUser == null) {
+			return "redirect:/";
+		}
+		////////////////////////////////////////
+		
+		vo.setNo(authUser.getNo());
+		userService.updateUser(vo);
+		authUser.setName(vo.getName());
+		
+		return "redirect:/user/update";
+	}		
 }

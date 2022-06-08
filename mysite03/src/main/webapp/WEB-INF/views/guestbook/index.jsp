@@ -1,9 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>  
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-
+<% pageContext.setAttribute("newline", "\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,8 +15,7 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="guestbook">
-				<form action="${pageContext.request.contextPath }/guestbook" method="post">
-					<input type="hidden" name="a" value="add">
+				<form action="${pageContext.request.contextPath }/guestbook/add" method="post">
 					<table>
 						<tr>
 							<td>이름</td><td><input type="text" name="name"></td>
@@ -32,21 +30,19 @@
 					</table>
 				</form>
 				<ul>
-					<c:set var='index' value='0'/>
-					<c:set var='count' value='${list.size() }'/>
-					<c:forEach var='list' items='${list }'>
+					<c:set var="count" value="${fn:length(list) }"/>
+					<c:forEach items="${list }" var="vo" varStatus="status">
 						<li>
 							<table>
 								<tr>
-									<td>[${count - index }]</td>
-									<c:set var='index' value='${index+1 }'/>
-									<td>${list.name }</td>
-									<td>${list.regDate }</td>
-									<td><a href="${pageContext.request.contextPath }/guestbook?a=deleteform&no=${list.no}">삭제</a></td>
+									<td>[${count-status.index }]</td>
+									<td>${vo.name }</td>
+									<td>${vo.regDate }</td>
+									<td><a href="${pageContext.request.contextPath }/guestbook/delete/${vo.no }">삭제</a></td>
 								</tr>
 								<tr>
 									<td colspan=4>
-										${fn:replace(list.message,newLine, "<br/>") }
+										${fn:replace(vo.message, newline, "<br/>") }	
 									</td>
 								</tr>
 							</table>
@@ -56,8 +52,8 @@
 				</ul>
 			</div>
 		</div>
-		<c:import url="/WEB-INF/views/includes/navigation.jsp" />
-		<c:import url="/WEB-INF/views/includes/footer.jsp" />
+		<c:import url="/WEB-INF/views/includes/navigation.jsp"/>
+		<c:import url="/WEB-INF/views/includes/footer.jsp"/>
 	</div>
 </body>
 </html>

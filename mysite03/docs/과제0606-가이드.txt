@@ -1,0 +1,11 @@
+"/delete/{no}" GET
+delete(@PathVariable("no") Long no)
+
+"/delete/{no}" POST
+delete(@PathVariable("no") Long no, 
+@RequestParam(value="password", required=ture, defaultValue = "") 
+String password)
+
+
+"/add" POST
+add(GuestbookVo vo)
