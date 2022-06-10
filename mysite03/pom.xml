@@ -8,7 +8,6 @@
 	<artifactId>mysite03</artifactId>
 	<packaging>war</packaging>
 
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.outputEncoding>UTF-8</project.build.outputEncoding>
@@ -23,6 +22,19 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${org.springframework-version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- Spring Aspect -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${org.springframework-version}</version>
 		</dependency>
 
 		<!-- Spring MVC -->
@@ -32,7 +44,6 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-
 		<!-- Spring JDBC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -40,20 +51,18 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-		<!-- MyBatis Core-->
+		<!-- MyBatis Core -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>3.5.9</version>
 		</dependency>
-
 		<!-- MyBatis Spring -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>2.0.7</version>
 		</dependency>
-
 
 		<!-- Common DBCP -->
 		<dependency>
@@ -74,6 +83,18 @@
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
+		</dependency>
+
+		<!-- Slf4j(Logback) -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.36</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.11</version>
 		</dependency>
 
 		<!-- Servlet -->
@@ -104,7 +125,7 @@
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<version>1.1</version>
 				<configuration>
-					<url>http://192.168.10.44:8080/manager/text</url>
+					<url>http://192.168.10.55:8080/manager/text</url>
 					<path>/mysite03</path>
 					<username>admin</username>
 					<password>manager</password>
@@ -112,6 +133,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>

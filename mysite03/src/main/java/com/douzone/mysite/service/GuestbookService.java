@@ -13,22 +13,14 @@ public class GuestbookService {
 	@Autowired
 	private GuestbookRepository guestbookRepository;
 	
-	//방명록 메세지 받아오기
 	public List<GuestbookVo> getMessageList() {
 		return guestbookRepository.findAll();
 	}
 	
-	
-	//방명록 메세지 지우기
 	public Boolean deleteMessage(Long no, String password) {
-		GuestbookVo vo = new GuestbookVo();
-		vo.setNo(no);
-		vo.setPassword(password);
-		
-		return guestbookRepository.delete(vo);
+		return guestbookRepository.delete(no, password);
 	}
 	
-	//방명록 메세지 더하기
 	public Boolean addMessage(GuestbookVo vo) {
 		return guestbookRepository.insert(vo);
 	}
