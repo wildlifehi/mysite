@@ -7,7 +7,6 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.StopWatch;
 
 import com.douzone.mysite.vo.GuestbookVo;
 
@@ -17,9 +16,7 @@ public class GuestbookRepository {
 	private SqlSession sqlSession;
 	
 	public List<GuestbookVo> findAll() {
-	
 		return sqlSession.selectList("guestbook.findAll");
-		
 	}
 	
 	public boolean delete(Long no, String password) {
@@ -31,9 +28,11 @@ public class GuestbookRepository {
 	}
 	
 	public boolean insert(GuestbookVo vo) {
+		
 		System.out.println(vo);
 		boolean result = sqlSession.insert("guestbook.insert", vo) == 1;
 		System.out.println(vo);
+		
 		
 		return result;
 	}

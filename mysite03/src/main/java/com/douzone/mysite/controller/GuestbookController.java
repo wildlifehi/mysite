@@ -49,5 +49,4 @@ public class GuestbookController {
 //	public String handlerException() {
 //		return "error/exception";
 //	}
-	
 }

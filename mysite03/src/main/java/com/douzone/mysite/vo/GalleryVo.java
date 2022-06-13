@@ -26,4 +26,6 @@ public class GalleryVo {
 	public String toString() {
 		return "GalleryVo [no=" + no + ", url=" + url + ", comments=" + comments + "]";
 	}
+	
+	
 }
