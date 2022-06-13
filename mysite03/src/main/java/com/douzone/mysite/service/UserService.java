@@ -14,7 +14,15 @@ public class UserService {
 	public void join(UserVo vo) {
 		userRepository.insert(vo);
 	}
-
+	
+	public UserVo getUser(String eamil, String password) {
+		UserVo vo = new UserVo();
+		vo.setEmail(eamil);
+		vo.setPassword(password);
+		
+		return getUser(vo);
+	}
+	
 	public UserVo getUser(UserVo vo) {
 		return userRepository.findByEmailAndPassword(vo);
 	}
