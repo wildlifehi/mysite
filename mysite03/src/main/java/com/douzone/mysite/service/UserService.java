@@ -14,10 +14,10 @@ public class UserService {
 	public void join(UserVo vo) {
 		userRepository.insert(vo);
 	}
-	
-	public UserVo getUser(String eamil, String password) {
+
+	public UserVo getUser(String email, String password) {
 		UserVo vo = new UserVo();
-		vo.setEmail(eamil);
+		vo.setEmail(email);
 		vo.setPassword(password);
 		
 		return getUser(vo);
