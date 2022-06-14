@@ -18,7 +18,7 @@ public class BoardRepository {
 	public int insert(BoardVo boardVo) {
 		return sqlSession.insert("board.insert", boardVo);
 	}
-
+	
 	public List<BoardVo> findAllByPageAndKeword(String keyword, Integer page, Integer size) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword", keyword);
