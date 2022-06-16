@@ -1,28 +1,28 @@
 # mysite
 
 ### mysite02
-1.  Servlet/jspp ±â¹İ
-2.  MVC(Model2)
-3.  war ÆĞÅ°Â¡(Tomcat ¹èÆ÷)
+1.	Servlet/JSP ê¸°ë°˜
+2.	MVC(Model2)
+3.	war íŒ¨í‚¤ì§•(Tomcat ë°°í¬)
 
 ### mysite03
-1.  Spring MVC
-2.  xml Configuration
-3.  war ÆĞÅ°Â¡(Tomcat ¹èÆ÷)
+1.	Spring MVC
+2.	xml configuration
+3.	war íŒ¨í‚¤ì§•(Tomcat ë°°í¬)
 
 ### mysite04
-1.  Spring MVC
-2.  java Configuration
-3.  war ÆĞÅ°Â¡(Tomcat ¹èÆ÷)
+1.	Spring MVC
+2.	java configuration
+3.	war íŒ¨í‚¤ì§•(Tomcat ë°°í¬)
 
 ### mysite05
-1.  Spring MVC
-2.  java Configuration
-3.  web.xml (none)
-4.  war ÆĞÅ°Â¡(Tomcat ¹èÆ÷)
+1.	Spring MVC
+2.	java configuration
+3.	web.xml (none)
+4.	war íŒ¨í‚¤ì§•(Tomcat ë°°í¬)
 
 ### mysite06
-1.  Spring MVC
-2.  auto Configuration +  ¹Ì¼¼¼³Á¤[application.properties(application.yml)]
-3.  jar ÆĞÅ°Â¡(Tomcat embeded) : ±âº»
-4.  war ÆĞÅ°Â¡(Tomcat ¹èÆ÷)
+1.	Spring Boot, Spring MVC
+2.	auto configuration + ë¯¸ì„¸ì„¤ì •[application.properties(application.yml)]
+3.	jar íŒ¨í‚¤ì§•(Tomcat embeded): ê¸°ë³¸
+4.	war íŒ¨í‚¤ì§•(Tomcat ë°°í¬)
