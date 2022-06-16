@@ -24,5 +24,5 @@
 ### mysite06
 1.  Spring MVC
 2.  auto Configuration +  미세설정[application.properties(application.yml)]
-3.  war 패키징(Tomcat 배포)
-4.  jar 패키징(Tomcat embeded)
+3.  jar 패키징(Tomcat embeded) : 기본
+4.  war 패키징(Tomcat 배포)
