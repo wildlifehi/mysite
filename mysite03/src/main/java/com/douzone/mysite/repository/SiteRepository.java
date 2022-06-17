@@ -10,6 +10,7 @@ import com.douzone.mysite.vo.SiteVo;
 public class SiteRepository {
 	@Autowired
 	private SqlSession sqlSession;
+	
 	public SiteVo find() {
 		return sqlSession.selectOne("site.find");
 	}
