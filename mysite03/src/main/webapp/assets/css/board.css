@@ -72,7 +72,7 @@ input#kwd	{
 	width: 480px;
 }
 
-.board-form .tbl-ex textarea#contents {
+.board-form .tbl-ex textarea#content {
 	width: 470px;
 	height: 200px;
 	padding: 10px;
@@ -128,7 +128,7 @@ a.del	{
 	display:block;
 	width:20px;
 	height:20px; 
-	background:url("/mysite03/assets/images/recycle.png") no-repeat 0 0;
+	background:url("/mysite02/assets/images/recycle.png") no-repeat 0 0;
 	font-size:0;
 }
 
@@ -150,6 +150,3 @@ div.pager  ul li a:visited,
 div.pager  ul li a:link,
 div.pager  ul li a:active	{ text-decoration: none; color:#555 }
 div.pager  ul li a:hover	{ text-decoration: none; color:#f00 }
-
-#linkpage { text-decoration: underline; }
-

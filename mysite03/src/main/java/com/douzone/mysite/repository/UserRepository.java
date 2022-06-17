@@ -1,7 +1,9 @@
 package com.douzone.mysite.repository;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.douzone.mysite.vo.UserVo;
 
 @Repository
@@ -15,14 +17,14 @@ public class UserRepository {
 	}
 
 	public UserVo findByEmailAndPassword(UserVo vo) {
-		return sqlSession.selectOne("user.findByEmailAndPassword",vo);
-	}
+		return sqlSession.selectOne("user.findByEmailAndPassword", vo);
+	}	
 
 	public UserVo findByNo(Long userNo) {
 		return sqlSession.selectOne("user.findByNo", userNo);
 	}
 
 	public boolean update(UserVo vo) {
-		return sqlSession.update("user.update", vo)== 1;
+		return sqlSession.update("user.update", vo) == 1;
 	}
 }

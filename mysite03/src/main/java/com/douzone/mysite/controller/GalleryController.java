@@ -19,30 +19,30 @@ import com.douzone.mysite.vo.GalleryVo;
 @Controller
 @RequestMapping("/gallery")
 public class GalleryController {
+	
 	@Autowired
 	private GalleryService galleryService;
 	
 	@Autowired
-	private FileUploadService fileUploadService;
+	private FileUploadService FileUploadService;
 	
 	@RequestMapping("")
 	public String index(Model model) {
 		List<GalleryVo> list = galleryService.getImages();
-		model.addAttribute("list",list);
+		model.addAttribute("list", list);
 		return "gallery/index";
 	}
 	
 	@Auth(role="ADMIN")
 	@RequestMapping(value="/upload", method=RequestMethod.POST)
 	public String upload(
-			@RequestParam("file") MultipartFile multipartFile, 
-			@RequestParam(value="comments", required=true, defaultValue="")String comments) {
+		@RequestParam("file") MultipartFile file,
+		@RequestParam(value="comments", required=true, defaultValue="") String comments) {
+		String url = FileUploadService.restoreImage(file);
 		
-		String url = fileUploadService.restoreImage(multipartFile);
 		GalleryVo vo = new GalleryVo();
 		vo.setUrl(url);
 		vo.setComments(comments);
-		
 		galleryService.saveImage(vo);
 		
 		return "redirect:/gallery";
@@ -51,8 +51,7 @@ public class GalleryController {
 	@Auth(role="ADMIN")
 	@RequestMapping(value="/delete/{no}")
 	public String delete(@PathVariable("no") Long no) {
-		galleryService.removeImages(no);
+		galleryService.removeImage(no);
 		return "redirect:/gallery";
 	}
-
 }

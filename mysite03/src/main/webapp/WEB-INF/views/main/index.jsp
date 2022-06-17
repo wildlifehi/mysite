@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% pageContext.setAttribute( "newLine", "\n" ); %>
+<% pageContext.setAttribute("newline", "\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,12 +16,11 @@
 		<div id="wrapper">
 			<div id="content">
 				<div id="site-introduction">
-					<img id="profile" style="width:120px" src="${pageContext.request.contextPath }${site.profileURL}">
+					<img id="profile" style="width:120px" src="${pageContext.request.contextPath }${site.profileUrl }">
 					<h2>${site.welcomeMessage }</h2>
 					<p>
 						${fn:replace(site.description, newline, "<br/>") }
 						<br/><br/>
-						
 						<a href="${pageContext.request.contextPath }/guestbook">방명록</a>에 글 남기기<br>
 					</p>
 				</div>

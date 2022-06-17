@@ -14,47 +14,40 @@ import com.douzone.mysite.vo.BoardVo;
 public class BoardService {
 	private static final int LIST_SIZE = 5; // 리스팅되는 게시물의 수
 	private static final int PAGE_SIZE = 5; // 페이지 리스트의 페이지 수
-	
+
 	@Autowired
 	private BoardRepository boardRepository;
-	
-	/*** Contents 정보 가져오기 ***/
-	public BoardVo getContents(Long no) {
-		BoardVo boardVo = boardRepository.findByNo( no );
-		
-		if( boardVo != null ) {
-			boardRepository.updateHit( no );
-		}
-		return boardVo;
-	}
-	
-	/*** 수정 시 Contents 정보 가져오기 ***/
-	public BoardVo getContents(Long no, Long userNo) {
-		BoardVo boardVo = boardRepository.findByNoAndUserNo( no, userNo );
-		return boardVo;
-	}
-	
-	/*** 수정 ***/
-	public boolean modifyContents(BoardVo boardVo) {
-		return  boardRepository.update(boardVo);
-	}
 
-	/*** 원글, 답글 작성시 한 곳에서 처리 ***/
 	public boolean addContents(BoardVo boardVo) {
-		if( boardVo.getGroupNo() != null ) {
-			updateGroupOrderNo( boardVo );
+		if (boardVo.getGroupNo() != null) {
+			increaseGroupOrderNo(boardVo);
 		}
-		return boardRepository.insert(boardVo);
+		return boardRepository.insert(boardVo) == 1;
 	}
 
-	/*** 답글시 g_no, o_no 수정 ***/
-	private boolean updateGroupOrderNo(BoardVo boardVo) {
-		return boardRepository.updateGroupOrderNo( boardVo.getGroupNo(), boardVo.getOrderNo() ) > 0;
+	public BoardVo getContents(Long no) {
+		BoardVo boardVo = boardRepository.findByNo(no);
+
+		if (boardVo != null) {
+			boardRepository.updateHit(no);
+		}
+
+		return boardVo;
 	}
 
-	/*** 삭제 ***/
-	public boolean deleteContents(Long no, Long userNo) {
-		return boardRepository.delete( no, userNo );
+	public BoardVo getContents(Long no, Long userNo) {
+		BoardVo boardVo = boardRepository.findByNoAndUserNo(no, userNo);
+		return boardVo;
+	}
+
+	public boolean modifyContents(BoardVo boardVo) {
+		int count = boardRepository.update(boardVo);
+		return count == 1;
+	}
+
+	public boolean deleteContents(Long boardNo, Long userNo) {
+		int count = boardRepository.delete(boardNo, userNo);
+		return count == 1;
 	}
 
 	public Map<String, Object> getContentsList(int currentPage, String keyword) {
@@ -101,9 +94,7 @@ public class BoardService {
 		return map;
 	}
 
-
-
-
-
-
+	public boolean increaseGroupOrderNo(BoardVo boardVo) {
+		return boardRepository.updateOrderNo(boardVo.getGroupNo(), boardVo.getOrderNo()) > 0;
+	}
 }

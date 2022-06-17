@@ -33,10 +33,12 @@ public class UserController {
 //			for(ObjectError error : list) {
 //				System.out.println(error);
 //			}
+			
 			model.addAllAttributes(result.getModel());
 //			model.addAttribute("userVo", userVo);
 			return "user/join";
 		}
+		
 		userService.join(userVo);
 		return "redirect:/user/joinsuccess";
 	}
@@ -62,15 +64,13 @@ public class UserController {
 	@Auth
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String update(@AuthUser UserVo authUser, Model model) {
-		//UserVo authUser = (UserVo)session.getAttribute("authUser");
-
 		Long no = authUser.getNo();
 		UserVo userVo = userService.getUser(no);
 		
 		model.addAttribute("userVo", userVo);
 		return "user/update";
 	}
-	
+
 	@Auth
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(@AuthUser UserVo authUser, UserVo vo) {

@@ -1,12 +1,12 @@
 package com.douzone.mysite.controller;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,39 +31,36 @@ public class AdminController {
 	
 	@RequestMapping("")
 	public String main(Model model) {
-		SiteVo vo = siteService.getSite();
-		model.addAttribute("site", vo);
-		System.out.println(vo);
+		SiteVo site = siteService.getSite();
+		model.addAttribute("site", site);
 		return "admin/main";
 	}
-	
-	@RequestMapping(value="/main/update", method=RequestMethod.POST)
-	public String update(SiteVo vo, @RequestParam("file") MultipartFile multipartFile) {
-		String url = fileUploadService.restoreImage(multipartFile);
+
+	@RequestMapping("/main/update")
+	public String main(SiteVo site, @RequestParam("file") MultipartFile file) {
+		String profileurl = fileUploadService.restoreImage(file);
 		
-		if(url != null) {
-			vo.setProfileURL(url);
+		if(profileurl != null) {
+			site.setProfileUrl(profileurl);
 		}
 		
-		siteService.updateSite(vo);
-		
-		servletContext.setAttribute("site", vo);
+		siteService.update(site);
+		servletContext.setAttribute("site", site);
 		return "redirect:/admin";
 	}
 	
-	@RequestMapping("guestbook")
-	public String guertbook() {
-		return "admin/guestbook";
-	}
-	
-	@RequestMapping("board")
+	@RequestMapping("/board")
 	public String board() {
 		return "admin/board";
 	}
-	
-	@RequestMapping("user")
-	public String user() {
-		return "admin/user";
+
+	@RequestMapping("/guestbook")
+	public String guestbook() {
+		return "admin/guestbook";
 	}
 
+	@RequestMapping("/user")
+	public String user() {
+		return "admin/user";
+	}	
 }
