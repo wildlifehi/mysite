@@ -11,12 +11,13 @@ public class SiteService {
 
 	@Autowired
 	private SiteRepository siteRepository;
+	
 	public SiteVo getSite() {
 		return siteRepository.find();
 	}
-	public void updateSite(SiteVo vo) {
-		siteRepository.update(vo);
+
+	public boolean update(SiteVo site) {
+		return siteRepository.update(site) == 1;
 	}
-	
 
 }

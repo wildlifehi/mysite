@@ -22,32 +22,34 @@
 					name="joinForm"
 					method="post"
 					action="${pageContext.request.contextPath }/user/join">
-				
+					
 					<label class="block-label" for="name">이름</label>
 					<form:input path="name" />
-						<p style="text-align: left; padding: 0; color: red;">
-							<spring:hasBindErrors name="userVo">
-								<c:if test='${errors.hasFieldErrors("name") }'>
-									<spring:message code='${errors.getFieldError("name").codes[0] }' />
-								</c:if>
-							</spring:hasBindErrors>
-						</p>
+					<p style="text-align:left; padding:0; color: red">
+						<spring:hasBindErrors name="userVo">
+							<c:if test='${errors.hasFieldErrors("name") }'>
+								<spring:message code='${errors.getFieldError("name").codes[0] }'/>
+							</c:if>
+						</spring:hasBindErrors>
+					</p>
+
 					<label class="block-label" for="email">이메일</label>
 					<form:input path="email" />
-					<p style="text-align: left; padding: 0; color: red;">
+					<input type="button" value="중복체크">
+					<p style="text-align:left; padding:0; color: red">
 						<form:errors path="email" />
 					</p>
-					<input type="button" value="중복체크">
 					
 					<label class="block-label"><spring:message code='user.join.label.password'/></label>
 					<form:password path="password" />
-					<p style="text-align: left; padding: 0; color: red;">
+					<p style="text-align:left; padding:0; color: red">
 						<form:errors path="password" />
 					</p>
+					
 					<fieldset>
 						<legend>성별</legend>
-						<form:radiobutton path="gender" value="female" label="여" check='${userVo.gender == "female"}'/>
-						<form:radiobutton path="gender" value="male" label="남" check='${userVo.gender == "male"}'/>
+						<form:radiobutton path="gender" value="female" label="여" check="${userVo.gender == 'female' }"/>
+						<form:radiobutton path="gender" value="male" label="남" check="${userVo.gender == 'male' } }"/>
 					</fieldset>
 					
 					<fieldset>

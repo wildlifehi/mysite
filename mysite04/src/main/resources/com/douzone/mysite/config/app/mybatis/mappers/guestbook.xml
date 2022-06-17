@@ -3,37 +3,35 @@
 <mapper namespace="guestbook">
 	<select id="findAll" resultType="guestbookvo">
 		<![CDATA[
-		select
-			no,
-			name,
-			date_format(reg_date, '%Y-%m-%d %H:%i:%s') as regDate,
-			message 
-		from guestbook
-		order by reg_date desc
+		  select no,
+		  		 name,
+		  		 date_format(reg_date, '%Y/%m/%d %H:%i:%s') as regDate,
+		  		 message
+		    from guestbook
+		order by reg_date desc		
 		]]>
 	</select>
 	
-	<!-- 객체 사용X Map 사용 Key값으로 -->
 	<delete id="delete" parameterType="map">
 		<![CDATA[
-			delete 
-			from guestbook 
-			where no = #{no }
-			and password = #{password }
+		delete
+		  from guestbook
+		 where no=#{no }
+		   and password=#{password }
 		]]>
 	</delete>
 	
 	<insert id="insert" parameterType="guestbookvo">
 		<![CDATA[
-			insert
-			into guestbook
-			values(null, #{name }, #{password }, #{message }, now())
+		insert
+		  into guestbook
+		values (null, #{name }, #{password }, #{message }, now())
 		]]>
-		<!-- select last_insert_id로 키값구해서  guestbookvo 어떤 객체에 세팅할건가? keyProperty-->
-		<selectKey keyProperty ="no" resultType="long" order="AFTER">
+		<selectKey keyProperty="no" resultType="long" order="AFTER">
 			<![CDATA[
-				select last_insert_id();
+			select last_insert_id();
 			]]>
 		</selectKey>
 	</insert>
+	
 </mapper>

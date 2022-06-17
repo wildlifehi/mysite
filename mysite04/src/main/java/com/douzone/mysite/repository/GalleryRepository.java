@@ -13,16 +13,15 @@ public class GalleryRepository {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<GalleryVo> findAll() {
-		return sqlSession.selectList("gallery.findAll");
-	}
-
 	public Boolean insert(GalleryVo vo) {
-		return sqlSession.insert("gallery.insert", vo) ==1;
+		return 1 == sqlSession.insert("gallery.insert", vo);
 	}
 
 	public Boolean delete(Long no) {
-		return sqlSession.delete("gallery.delete", no) ==1;
+		return 1 == sqlSession.delete("gallery.delete", no);
 	}
 
+	public List<GalleryVo> findAll() {
+		return sqlSession.selectList("gallery.findAll");
+	}
 }
