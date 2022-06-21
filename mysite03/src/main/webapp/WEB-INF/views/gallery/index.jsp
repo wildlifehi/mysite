@@ -14,7 +14,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/lightbox.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<c:if test="${not empty authUser && authUser.role == 'ADMIN' }">
+<c:if test="${not empty authUser }">
 	<script type="text/javascript">
 		$(function(){
 			// 업로드 다이알로그
@@ -52,7 +52,7 @@
 			<div id="gallery">
 				<div>
 					<h1 style="background: url('${pageContext.request.contextPath }/assets/images/gallery.png') no-repeat 0 0 / 35px">갤러리</h1>
-					<c:if test="${not empty authUser && authUser.role == 'ADMIN' }">
+					<c:if test="${not empty authUser }">
 						<a href="" id="upload-image">이미지 올리기</a>
 					</c:if>
 				</div>
@@ -75,7 +75,7 @@
 				</ul>	
 			</div>
 			
-			<c:if test="${not empty authUser && authUser.role == 'ADMIN' }">
+			<c:if test="${not empty authUser }">
 				<div id="dialog-upload-form" title="이미지 업로드" style="display:none">
 	  				<p class="validateTips normal">이미지와 간단한 코멘트를 입력해 주세요.</p>
 	  				<form action="${pageContext.request.contextPath }/gallery/upload" 
