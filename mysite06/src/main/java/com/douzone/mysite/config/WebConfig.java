@@ -20,10 +20,7 @@ import com.douzone.mysite.security.LoginInterceptor;
 import com.douzone.mysite.security.LogoutInterceptor;
 
 @SpringBootConfiguration
-@PropertySource("classpath:config/WebConfig.properties")
 public class WebConfig implements WebMvcConfigurer {
-	@Autowired
-	private Environment env;
 	
 	// Site Interceptor
 	@Bean
