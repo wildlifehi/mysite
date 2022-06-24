@@ -33,7 +33,7 @@ spring:
    # datasource
    datasource:
       driver-class-name: org.mariadb.jdbc.Driver
-      url: jdbc:mysql://192.168.10.55:3306/webdb?characterEncoding=utf8
+      url: jdbc:mysql://192.168.10.44:3306/webdb?characterEncoding=utf8
       username: webdb
       password: webdb
       hikari:
@@ -58,4 +58,20 @@ server:
 
 # logging configuration
 loggin:
+   pattern:
+      file: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n"
+   logback:
+      rollingpolicy:
+         file-name-pattern: "/${spring.application.name}-logs/exception.%i.log.zip"
+         max-file-size: 200MB
+         max-history: 10
+   file:
+      name: /${spring.application.name}-logs/exception.log
+   level:
+      root: INFO
+      com: 
+         douzone: 
+            mysite: 
+               exception: ERROR
    config: classpath:logback.xml
+      
