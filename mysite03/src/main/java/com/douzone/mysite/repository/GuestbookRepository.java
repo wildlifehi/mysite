@@ -12,13 +12,11 @@ import com.douzone.mysite.vo.GuestbookVo;
 
 @Repository
 public class GuestbookRepository {
-	
 	@Autowired
 	private SqlSession sqlSession;
 	
 	public List<GuestbookVo> findAll() {
 		return sqlSession.selectList("guestbook.findAll");
-	
 	}
 	
 	public boolean delete(Long no, String password) {

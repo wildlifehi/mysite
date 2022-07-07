@@ -10,6 +10,12 @@
 <title>mysite</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link href="${pageContext.request.contextPath }/assets/css/user.css" rel="stylesheet" type="text/css">
+<script>
+
+
+
+
+</script>
 </head>
 <body>
 	<div id="container">
@@ -36,6 +42,7 @@
 					<label class="block-label" for="email">이메일</label>
 					<form:input path="email" />
 					<input type="button" value="중복체크">
+					<img id="img-checkemail" style="width:24px; vertical-align: bottom; display:;" src="${pageContext.request.contextPath }/assets/images/check.png" />
 					<p style="text-align:left; padding:0; color: red">
 						<form:errors path="email" />
 					</p>
