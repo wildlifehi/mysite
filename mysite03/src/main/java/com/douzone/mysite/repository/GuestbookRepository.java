@@ -15,6 +15,10 @@ public class GuestbookRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public List<GuestbookVo> findAll(Long no) {
+		return sqlSession.selectList("guestbook.findAllByNo", no);
+	}
+	
 	public List<GuestbookVo> findAll() {
 		return sqlSession.selectList("guestbook.findAll");
 	}
