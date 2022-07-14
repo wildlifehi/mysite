@@ -140,6 +140,7 @@ $(function(){
 						</spring:hasBindErrors>
 					</p>
 
+
 					<label class="block-label" for="email">이메일</label>
 					<form:input path="email" />
 					<input type="button" id='btn-checkemail' value="중복체크">
